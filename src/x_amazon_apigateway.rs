@@ -12,7 +12,7 @@ impl XAmazonApigateway {
     }
   }
 
-  pub fn extend<T, M>(mut self, e: &T) -> Result<Self>
+  pub fn extend<T, M>(self, e: &T) -> Result<Self>
   where T: traits::Extend<M>
   {
     Ok(XAmazonApigateway { 
