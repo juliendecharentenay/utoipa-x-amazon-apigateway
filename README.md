@@ -26,7 +26,7 @@ Implementation of OpenAPI extension for Amazon API Gateway for utoipa library
 - [ ] x-amazon-apigateway-integration.responseTemplates object
 - [ ] x-amazon-apigateway-integration.responseParameters object
 - [ ] x-amazon-apigateway-integration.tlsConfig object
-- [ ] x-amazon-apigateway-minimum-compression-size
+- [x] x-amazon-apigateway-minimum-compression-size
 - [ ] x-amazon-apigateway-policy
 - [x] x-amazon-apigateway-request-validator property
 - [x] x-amazon-apigateway-request-validators object

@@ -92,7 +92,7 @@ mod x_amazon_apigateway; pub use x_amazon_apigateway::XAmazonApigateway;
 mod traits;
 mod structs;
 pub use structs::{
-  root::{request_validators, api_key_source, },
+  root::{request_validators, api_key_source, minimum_compression_size, },
   operation,
   operation::{request_validator,},
 };
