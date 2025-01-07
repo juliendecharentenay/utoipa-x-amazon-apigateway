@@ -39,8 +39,35 @@
 //! }
 //! 
 //! #[derive(OpenApi)]
-//! #[openapi(paths(get_pet_by_id))]
+//! #[openapi(
+//!    paths(get_pet_by_id),
+//!    modifiers(&RequestValidatorsBody, &RequestValidatorsParameter),
+//! )]
 //! struct ApiDoc;
+//!
+//! utoipa_x_amazon_apigateway::define_api_modifier!(
+//!   RequestValidatorsBody,
+//!   utoipa_x_amazon_apigateway::x_amazon_apigateway::request_validators::from_name_validate_body_validate_parameters(
+//!     "body_validator", true, false,
+//!   )
+//! );
+//! utoipa_x_amazon_apigateway::define_api_modifier!(
+//!   RequestValidatorsParameter,
+//!   utoipa_x_amazon_apigateway::x_amazon_apigateway::request_validators::from_name_validate_body_validate_parameters(
+//!     "parameter_validator", false, true,
+//!   )
+//! );
+//!
+//! let openapi = ApiDoc::openapi();
+//! let extensions = openapi.extensions.as_ref().unwrap();
+//! assert!(extensions.len() == 1);
+//! let request_validators = extensions.get("x-amazon-apigateway-request-validators").unwrap()
+//! .as_object().unwrap();
+//! assert!(request_validators.contains_key("body_validator"));
+//! assert!(request_validators.contains_key("parameter_validator"));
+//! ```
+//!
+//! ```rust_ignore
 //!
 //! // Extend with `x-amazon-apigateway-request-validators`
 //! let openapi = ApiDoc::openapi();
@@ -87,14 +114,27 @@
 //! 
 //! ```
 
-mod x_amazon_apigateway; pub use x_amazon_apigateway::XAmazonApigateway;
 
+mod error; pub use error::Result;
+mod utils;
 mod traits;
+pub mod enums;
+// mod operation;
+
+pub mod x_amazon_apigateway;
+
+pub mod extensions;
+
+mod macro_rules;
+
+
+/*
 mod structs;
 pub use structs::{
   root::{request_validators, api_key_source, minimum_compression_size, },
   operation,
   operation::{request_validator,},
 };
-mod error; pub use error::Result;
+*/
+
 

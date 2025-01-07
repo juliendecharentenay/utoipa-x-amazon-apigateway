@@ -1,6 +1,7 @@
 use super::*;
 
 pub mod request_validator;
+pub mod integration;
 
 pub fn from_path_method<E>(path: &str, http_method: utoipa::openapi::HttpMethod, inner: E) -> Operation<E> 
 where E: traits::Extensions

@@ -10,4 +10,5 @@ serde_json = { version = "1" }
 log        = { version = "0" }
 thiserror  = { version = "2" }
 strum      = { version = "0", features = [ "derive" ] }
+mime       = { version = "0" }
 
